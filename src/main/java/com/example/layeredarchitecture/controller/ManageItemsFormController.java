@@ -224,14 +224,17 @@ public class ManageItemsFormController {
                 ItemDTO CD=new ItemDTO();
                 CD.setCode(code);
                 ItemDAO itemDAO=new ItemDAOImpl();
-              itemDAO.updateItem(CD);
+                boolean isUpdate = itemDAO.updateItem(code, description, qtyOnHand, unitPrice);
 
-    ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
-    selectedItem.setDescription(description);
-    selectedItem.setQtyOnHand(qtyOnHand);
-    selectedItem.setUnitPrice(unitPrice);
-    tblItems.refresh();
-
+                if (isUpdate){
+                    ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
+                    selectedItem.setDescription(description);
+                    selectedItem.setQtyOnHand(qtyOnHand);
+                    selectedItem.setUnitPrice(unitPrice);
+                    tblItems.refresh();
+                }else {
+                    new Alert(Alert.AlertType.ERROR, "item is not updated").show();
+                }
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             } catch (ClassNotFoundException e) {

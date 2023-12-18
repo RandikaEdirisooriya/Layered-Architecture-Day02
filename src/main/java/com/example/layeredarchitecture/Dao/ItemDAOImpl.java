@@ -4,6 +4,7 @@ import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -63,15 +64,16 @@ public class ItemDAOImpl implements ItemDAO {
         }
         return code;
     }@Override
-public void updateItem(ItemDTO dt) throws SQLException, ClassNotFoundException {
-    Connection connection = DBConnection.getDbConnection().getConnection();
-    PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
-    pstm.setString(1, dt.getDescription());
-    pstm.setBigDecimal(2, dt.getUnitPrice());
-    pstm.setInt(3, dt.getQtyOnHand());
-    pstm.setString(4, dt.getCode());
-    pstm.executeUpdate();
-}
+
+    public boolean updateItem(String code, String description, int qtyOnHand, BigDecimal unitPrice) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
+        pstm.setString(1, description);
+        pstm.setBigDecimal(2, unitPrice);
+        pstm.setInt(3, qtyOnHand);
+        pstm.setString(4, code);
+        return pstm.executeUpdate()>0;
+    }
 
     @Override
     public String genarateId() throws SQLException, ClassNotFoundException {
@@ -85,5 +87,18 @@ public void updateItem(ItemDTO dt) throws SQLException, ClassNotFoundException {
             return "I00-001";
         }
     }
+
+    @Override
+    public ItemDTO findItems(String itemCode) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
+        pstm.setString(1, itemCode + "");
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+        ItemDTO item = new ItemDTO(itemCode + "", rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
+        return item;
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.layeredarchitecture.controller;
 
 
+import com.example.layeredarchitecture.Dao.CustomerDAO;
 import com.example.layeredarchitecture.Dao.customerDAOImpl;
 
 import com.example.layeredarchitecture.model.CustomerDTO;
@@ -38,6 +39,7 @@ public class ManageCustomersFormController {
     public TextField txtCustomerAddress;
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
+    CustomerDAO customerDAO=new customerDAOImpl();
 
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -150,7 +152,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
 
-                customerDAOImpl customerDAO=new customerDAOImpl();
+
                 CustomerDTO customerDTO=new CustomerDTO();
                 customerDTO.setId(id);
                 customerDTO.setName(name);
@@ -175,7 +177,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
 
-                customerDAOImpl customerDAO=new customerDAOImpl();
+
                 CustomerDTO customerDTO=new CustomerDTO();
                 customerDTO.setId(id);
                 customerDAO.updateCustomer(customerDTO);
@@ -201,8 +203,8 @@ public class ManageCustomersFormController {
 
         CustomerDTO customerDTO=new CustomerDTO();
         customerDTO.setId(id);
-        customerDAOImpl customerDAO=new customerDAOImpl();
-        return customerDAO.existCustomer(customerDTO);
+
+        return customerDAO.existCustomer(id);
     }
 
 
@@ -216,7 +218,7 @@ public class ManageCustomersFormController {
 
             CustomerDTO customerDTO=new CustomerDTO();
             customerDTO.setId(id);
-            customerDAOImpl customerDAO=new customerDAOImpl();
+
             boolean isDeleted=    customerDAO.deleteCustomer(customerDTO);
 
 
@@ -236,7 +238,7 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            customerDAOImpl customerDAO=new customerDAOImpl();
+
             return customerDAO.generateNewId();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();

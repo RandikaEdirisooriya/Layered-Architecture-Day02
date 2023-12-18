@@ -38,10 +38,10 @@ public class customerDAOImpl implements CustomerDAO {
         return pstm.executeUpdate()>0;
     }
 @Override
-    public boolean existCustomer(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
+    public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
-        pstm.setString(1, customerDTO.getId());
+        pstm.setString(1,id);
         return pstm.executeQuery().next();
     }
 @Override
@@ -62,5 +62,16 @@ public class customerDAOImpl implements CustomerDAO {
         } else {
             return "C00-001";
         }
+    }
+
+    @Override
+    public String SearchCustomer(String newValue) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
+        pstm.setString(1, newValue + "");
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+        CustomerDTO customerDTO = new CustomerDTO(newValue + "", rst.getString("name"), rst.getString("address"));
+        return customerDTO.getName();
     }
 }
