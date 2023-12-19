@@ -7,14 +7,16 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
-public interface ItemDAO {
- ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException ;
+public interface ItemDAO extends CrudDAO<ItemDTO> {
+ /*ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException ;
    boolean deleteItem(ItemDTO c) throws SQLException, ClassNotFoundException ;
 
    boolean saveItem(ItemDTO dt) throws SQLException, ClassNotFoundException ;
    boolean existItem(String code) throws SQLException, ClassNotFoundException ;
     String genereteId() throws SQLException, ClassNotFoundException;
-     boolean updateItem(String code, String description, int qtyOnHand, BigDecimal unitPrice) throws SQLException, ClassNotFoundException;
+
+ */
+ boolean updateItem(String code, String description, int qtyOnHand, BigDecimal unitPrice) throws SQLException, ClassNotFoundException;
 
     String genarateId() throws SQLException, ClassNotFoundException;
 

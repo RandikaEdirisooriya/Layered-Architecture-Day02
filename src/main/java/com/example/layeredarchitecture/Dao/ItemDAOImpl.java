@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ItemDAOImpl implements ItemDAO {
 
     @Override
-    public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException {
+    public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
 
         ResultSet rst=SQLUtil.test("SELECT * FROM Item");
         ArrayList<ItemDTO> getAlllItem = new ArrayList<>();
@@ -30,22 +30,29 @@ public class ItemDAOImpl implements ItemDAO {
 
         return getAlllItem;
     }@Override
-    public boolean deleteItem(ItemDTO c) throws SQLException, ClassNotFoundException {
+    public boolean delete(ItemDTO c) throws SQLException, ClassNotFoundException {
 
        return SQLUtil.test("DELETE FROM Item WHERE code=?",c.getCode());
 
     }
 @Override
-    public boolean saveItem(ItemDTO dt) throws SQLException, ClassNotFoundException {
+    public boolean Save(ItemDTO dt) throws SQLException, ClassNotFoundException {
 
     return SQLUtil.test("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)", dt.getCode(),dt.getDescription(),dt.getUnitPrice(),dt.getQtyOnHand());
-    }@Override
-    public boolean existItem(String code) throws SQLException, ClassNotFoundException {
+    }
+
+    @Override
+    public boolean update(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean exist(String code) throws SQLException, ClassNotFoundException {
 
         ResultSet resultSet =SQLUtil.test("SELECT code FROM Item WHERE code=?",code);
         return resultSet.next();
     }@Override
-    public String genereteId() throws SQLException, ClassNotFoundException {
+    public String generateNewId() throws SQLException, ClassNotFoundException {
 
 
         ResultSet rst = SQLUtil.test("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
@@ -55,7 +62,14 @@ public class ItemDAOImpl implements ItemDAO {
             return code;
         }
         return code;
-    }@Override
+    }
+
+    @Override
+    public String Search(String newValue) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
 
     public boolean updateItem(String code, String description, int qtyOnHand, BigDecimal unitPrice) throws SQLException, ClassNotFoundException {
 

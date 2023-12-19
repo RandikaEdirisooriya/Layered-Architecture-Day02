@@ -131,7 +131,7 @@ public class PlaceOrderFormController {
 
                 /*Find Item*/
                 try {
-                    if (!itemDAO.existItem(newItemCode + "")) {
+                    if (!itemDAO.exist(newItemCode + "")) {
 //                        throw new NotFoundException("There is no such item associated with the id " + code);
                     }
 
@@ -207,7 +207,7 @@ public class PlaceOrderFormController {
     private void loadAllItemCodes() {
         try {
             /*Get all items*/
-            ArrayList<ItemDTO> itemDTOS = itemDAO.getAllItem();
+            ArrayList<ItemDTO> itemDTOS = itemDAO.getAll();
             for (ItemDTO dto:itemDTOS) {
                 cmbItemCode.getItems().add(dto.getCode());
             }

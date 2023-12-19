@@ -75,7 +75,7 @@ public class ManageItemsFormController {
         tblItems.getItems().clear();
         try {
 
-            ArrayList<ItemDTO> allItems = itemDao.getAllItem();
+            ArrayList<ItemDTO> allItems = itemDao.getAll();
 
             for (ItemDTO item : allItems) {
                 tblItems.getItems().add(new ItemTM(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
@@ -143,7 +143,7 @@ public class ManageItemsFormController {
             ItemDTO CD=new ItemDTO();
             CD.setCode(code);
 
-            boolean res=itemDao.deleteItem(CD);
+            boolean res=itemDao.delete(CD);
 
         if(res) {
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
@@ -198,7 +198,7 @@ public class ManageItemsFormController {
                 DT.setDescription(description);
                 DT.setUnitPrice(unitPrice);
                 DT.setQtyOnHand(qtyOnHand);
-                boolean res=itemDao.saveItem(DT);
+                boolean res=itemDao.Save(DT);
                 if(res) {
                     tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
                 }
@@ -252,7 +252,7 @@ public class ManageItemsFormController {
         pstm.setString(1, code);
         return pstm.executeQuery().next();*/
 
-        return itemDao.existItem(code);
+        return itemDao.exist(code);
     }
 
 
