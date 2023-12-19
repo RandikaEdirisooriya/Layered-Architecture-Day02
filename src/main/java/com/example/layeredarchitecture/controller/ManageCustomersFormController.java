@@ -74,7 +74,7 @@ public class ManageCustomersFormController {
         try {
 
             customerDAOImpl customerDAO=new customerDAOImpl();
-            ArrayList<CustomerDTO> allCustomer=customerDAO.getAllCustomer();
+            ArrayList<CustomerDTO> allCustomer=customerDAO.getAll();
 
 
             for (CustomerDTO cu:allCustomer
@@ -157,7 +157,7 @@ public class ManageCustomersFormController {
                 customerDTO.setId(id);
                 customerDTO.setName(name);
                 customerDTO.setAddress(address);
-                boolean isSaved=customerDAO.customerSave(customerDTO);
+                boolean isSaved=customerDAO.Save(customerDTO);
                 if(isSaved){
 
                     tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -180,7 +180,7 @@ public class ManageCustomersFormController {
 
                 CustomerDTO customerDTO=new CustomerDTO();
                 customerDTO.setId(id);
-                customerDAO.updateCustomer(customerDTO);
+                customerDAO.update(customerDTO);
 
 
             } catch (SQLException e) {
@@ -204,7 +204,7 @@ public class ManageCustomersFormController {
         CustomerDTO customerDTO=new CustomerDTO();
         customerDTO.setId(id);
 
-        return customerDAO.existCustomer(id);
+        return customerDAO.exist(id);
     }
 
 
@@ -219,7 +219,7 @@ public class ManageCustomersFormController {
             CustomerDTO customerDTO=new CustomerDTO();
             customerDTO.setId(id);
 
-            boolean isDeleted=    customerDAO.deleteCustomer(customerDTO);
+            boolean isDeleted=    customerDAO.delete(customerDTO);
 
 
             if(isDeleted) {

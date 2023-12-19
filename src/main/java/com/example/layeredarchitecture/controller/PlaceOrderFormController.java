@@ -101,12 +101,12 @@ public class PlaceOrderFormController {
                     /*Search Customer*/
 
                     try {
-                        if (!customerDAO.existCustomer(newValue + "")) {
+                        if (!customerDAO.exist(newValue + "")) {
 //                            "There is no such customer associated with the id " + id
                             new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + newValue + "").show();
                         }
 
-                        String cusName = customerDAO.SearchCustomer(newValue);
+                        String cusName = customerDAO.Search(newValue);
 
                         txtCustomerName.setText(cusName);
                     } catch (SQLException e) {
@@ -192,7 +192,7 @@ public class PlaceOrderFormController {
     }
     private void loadAllCustomerIds() {
         try {
-            ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
+            ArrayList<CustomerDTO> allCustomer = customerDAO.getAll();
             for (CustomerDTO dto: allCustomer) {
                 cmbCustomerId.getItems().add(dto.getId());
             }
