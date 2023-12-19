@@ -39,28 +39,17 @@ public class ItemDAOImpl implements ItemDAO {
     }
 @Override
     public boolean saveItem(ItemDTO dt) throws SQLException, ClassNotFoundException {
-    /*    Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
-        pstm.setString(1, dt.getCode());
-        pstm.setString(2, dt.getDescription());
-        pstm.setBigDecimal(3, dt.getUnitPrice());
-        pstm.setInt(4, dt.getQtyOnHand());
-       return pstm.executeUpdate();*/
+
     return SQLUtil.test("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)", dt.getCode(),dt.getDescription(),dt.getUnitPrice(),dt.getQtyOnHand());
     }@Override
     public boolean existItem(String code) throws SQLException, ClassNotFoundException {
-       /* Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
-        pstm.setString(1, code);
-        return pstm.executeQuery().next();*/
+
         ResultSet resultSet =SQLUtil.test("SELECT code FROM Item WHERE code=?",code);
         return resultSet.next();
     }@Override
     public String genereteId() throws SQLException, ClassNotFoundException {
-/*
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
-*/
+
+
         ResultSet rst = SQLUtil.test("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
         String code=null;
         if (rst.next()) {
