@@ -143,9 +143,9 @@ public class ManageItemsFormController {
             ItemDTO CD=new ItemDTO();
             CD.setCode(code);
 
-            int res=itemDao.deleteItem(CD);
+            boolean res=itemDao.deleteItem(CD);
 
-        if(res>0) {
+        if(res) {
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
             tblItems.getSelectionModel().clearSelection();
             initUI();
@@ -198,8 +198,8 @@ public class ManageItemsFormController {
                 DT.setDescription(description);
                 DT.setUnitPrice(unitPrice);
                 DT.setQtyOnHand(qtyOnHand);
-                int res=itemDao.saveItem(DT);
-                if(res>0) {
+                boolean res=itemDao.saveItem(DT);
+                if(res) {
                     tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
                 }
             } catch (SQLException e) {

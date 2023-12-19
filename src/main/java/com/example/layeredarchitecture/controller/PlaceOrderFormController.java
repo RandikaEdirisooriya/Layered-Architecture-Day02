@@ -99,7 +99,7 @@ public class PlaceOrderFormController {
             if (newValue != null) {
                 try {
                     /*Search Customer*/
-                   /* Connection connection = DBConnection.getDbConnection().getConnection();*/
+
                     try {
                         if (!customerDAO.existCustomer(newValue + "")) {
 //                            "There is no such customer associated with the id " + id
@@ -320,12 +320,7 @@ public class PlaceOrderFormController {
 
     public ItemDTO findItem(String code) {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
-            pstm.setString(1, code);
-            ResultSet rst = pstm.executeQuery();
-            rst.next();
-            return new ItemDTO(code, rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
+            return itemDAO.findItems(code);
         } catch (SQLException e) {
             throw new RuntimeException("Failed to find the Item " + code, e);
         } catch (ClassNotFoundException e) {
