@@ -1,7 +1,11 @@
 package com.example.layeredarchitecture.controller;
 
-import com.example.layeredarchitecture.Dao.*;
-import com.example.layeredarchitecture.db.DBConnection;
+import com.example.layeredarchitecture.Dao.Custom.CustomerDAO;
+import com.example.layeredarchitecture.Dao.Custom.ItemDAO;
+import com.example.layeredarchitecture.Dao.Custom.OrderDAO;
+import com.example.layeredarchitecture.Dao.Custom.Impl.ItemDAOImpl;
+import com.example.layeredarchitecture.Dao.Custom.Impl.OrderDAOImpl;
+import com.example.layeredarchitecture.Dao.Custom.Impl.customerDAOImpl;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
 import com.example.layeredarchitecture.model.OrderDetailDTO;

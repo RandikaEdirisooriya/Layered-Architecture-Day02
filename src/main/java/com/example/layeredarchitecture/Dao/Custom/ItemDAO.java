@@ -1,11 +1,10 @@
-package com.example.layeredarchitecture.Dao;
+package com.example.layeredarchitecture.Dao.Custom;
 
-import com.example.layeredarchitecture.db.DBConnection;
+import com.example.layeredarchitecture.Dao.CrudDAO;
 import com.example.layeredarchitecture.model.ItemDTO;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.ArrayList;
 
 public interface ItemDAO extends CrudDAO<ItemDTO> {
  /*ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException ;

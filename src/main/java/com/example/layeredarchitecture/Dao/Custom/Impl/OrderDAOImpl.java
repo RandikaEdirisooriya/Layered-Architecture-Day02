@@ -1,5 +1,8 @@
-package com.example.layeredarchitecture.Dao;
+package com.example.layeredarchitecture.Dao.Custom.Impl;
 
+import com.example.layeredarchitecture.Dao.Custom.ItemDAO;
+import com.example.layeredarchitecture.Dao.Custom.OrderDAO;
+import com.example.layeredarchitecture.Dao.SQLUtil;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.ItemDTO;
 import com.example.layeredarchitecture.model.OrderDetailDTO;
@@ -10,11 +13,11 @@ import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
     private ItemDAO itemDAO=new ItemDAOImpl();
-    private orderDetailsDAO orderDetailsDAO=new orderDetailDAOimpl();
+    private com.example.layeredarchitecture.Dao.Custom.orderDetailsDAO orderDetailsDAO=new orderDetailDAOimpl();
         @Override
         public String generateNextNewOrderId() throws SQLException, ClassNotFoundException {
 
-            ResultSet rst =SQLUtil.test("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
+            ResultSet rst = SQLUtil.test("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
 
             return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
         }
