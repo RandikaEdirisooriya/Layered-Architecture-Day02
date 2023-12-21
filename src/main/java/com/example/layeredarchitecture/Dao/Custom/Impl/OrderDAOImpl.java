@@ -9,18 +9,50 @@ import com.example.layeredarchitecture.model.OrderDetailDTO;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
     private ItemDAO itemDAO=new ItemDAOImpl();
     private com.example.layeredarchitecture.Dao.Custom.orderDetailsDAO orderDetailsDAO=new orderDetailDAOimpl();
-        @Override
-        public String generateNextNewOrderId() throws SQLException, ClassNotFoundException {
+
+    @Override
+    public ArrayList<OrderDetailDTO> getAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean Save(OrderDetailDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(OrderDetailDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean exist(String dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(OrderDetailDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+        public String generateNewId() throws SQLException, ClassNotFoundException {
 
             ResultSet rst = SQLUtil.test("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
 
             return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
         }
+
+    @Override
+    public String Search(String newValue) throws SQLException, ClassNotFoundException {
+        return null;
+    }
 
 
     @Override
