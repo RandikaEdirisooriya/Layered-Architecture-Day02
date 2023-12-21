@@ -63,4 +63,11 @@ public class orderDetailDAOimpl implements orderDetailsDAO {
     public String Search(String newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
+/*    public void query(){
+
+    }
+
+    public static void main(String[] args) {
+
+    }*/
 }

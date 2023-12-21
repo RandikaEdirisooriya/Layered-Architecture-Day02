@@ -1,5 +1,6 @@
 package com.example.layeredarchitecture.controller;
 
+
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -120,7 +121,7 @@ public class MainFormController {
                     root = FXMLLoader.load(this.getClass().getResource("/com/example/layeredarchitecture/place-order-form.fxml"));
                     break;
                 case "imgViewOrders":
-                    root = null;
+                    root =  FXMLLoader.load(this.getClass().getResource("/com/example/layeredarchitecture/search_form.fxml"));
                     break;
             }
 

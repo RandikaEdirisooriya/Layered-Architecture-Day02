@@ -1,6 +1,7 @@
 package com.example.layeredarchitecture.Dao.Custom.Impl;
 
 import com.example.layeredarchitecture.Dao.Custom.CustomerDAO;
+import com.example.layeredarchitecture.Dao.QueryDAO;
 import com.example.layeredarchitecture.Dao.SQLUtil;
 import com.example.layeredarchitecture.model.CustomerDTO;
 
@@ -73,4 +74,30 @@ public class customerDAOImpl implements CustomerDAO {
         CustomerDTO customerDTO = new CustomerDTO(newValue + "", rst.getString("name"), rst.getString("address"));
         return customerDTO.getName();
     }
+  /*  public  void query() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = SQLUtil.test("SELECT * FROM Customer c JOIN Orders o ON c.id = o.customerID;");
+
+        while (resultSet.next()) {
+            // Retrieve data from the result set
+            String customerId = resultSet.getString("id"); // Replace with the actual column name
+            String customerName = resultSet.getString("name"); // Replace with the actual column name
+            String customerAddress = resultSet.getString("address"); // Replace with the actual column name
+
+            String orderId = resultSet.getString("oid"); // Replace with the actual column name
+            String orderDate = resultSet.getString("date"); // Replace with the actual column name
+
+            // Print or process the retrieved data as needed
+            System.out.println("Customer ID: " + customerId);
+            System.out.println("Customer Name: " + customerName);
+            System.out.println("Customer Address: " + customerAddress);
+
+            System.out.println("Order ID: " + orderId);
+            System.out.println("Order Date: " + orderDate);
+
+            System.out.println(); // Print an empty line between records
+        }
+
+    }*/
+
+
 }

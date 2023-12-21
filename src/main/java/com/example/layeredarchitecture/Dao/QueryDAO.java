@@ -1,6 +1,8 @@
 package com.example.layeredarchitecture.Dao;
 
-public interface QueryDAO {
+import java.sql.SQLException;
 
-    
+public interface QueryDAO {
+     String query() throws SQLException, ClassNotFoundException;
+
 }
